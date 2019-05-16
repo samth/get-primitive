@@ -4,7 +4,7 @@
     (lambda (sym)
       (define-values (s) (if (eq? sym 'f) 'g 'f))
       (define-values (l) (compile-linklet
-                          (list 'linklet '() (list s) (list 'define-values (list s) sym))))
-      (define-values (li) (instantiate-linklet l null))
-      (instance-variable-value li s)))
+                          (list 'linklet '() '() sym)))
+      (define-values (li) (instantiate-linklet l null (make-instance 'tmp)))
+      li))
   (#%provide get-primitive))
